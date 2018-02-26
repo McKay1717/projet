@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+- 2.3.3
+deploy:
+  provider: heroku
+  api_key:
+    secure: v8OVExfwXq2OzzQCTzekffSaaGu+Ti5I5wVI018NnWtgbjt6NCu/w+XxMUPDJqk9kvwUmPjwj8Fxb1y8Dzp5GHyILpjYMjc4Ek7PvGvPd3++UE62PWwB6m/4TBDr/hc0TJXQN4ZLTpn/fqRTLQmfTXyUNL83Ahd7r5c8ly+wCJcLJuEFADSOy5LBeqLB6PH030kXFDVb+mZ/wa8WZ0HuoAuSOU4qQgH0M9itZLiXEjzSIgrnFLgX1u6zOigakYe5soPrmhbZNHllWWoGg49zHgwXrQLsfNMoJPov0JDNtRXFzmbZpH4jQtIgRkafJowiCo45XZrLf6BhCoaa/oBXL2Tn2yZ+zjZZXhqbmNTMmFieqJPVFTWOjgpwj/4ftzyF0KTN1cbgrgfbjs8OZOiL7L+1OvwYF/gV2u/8DtK3FX6PNe7Jbmh3+XIztnSts5qVJ+Fu0xlp4qpVDHxKkvz545sH14PJOIWz3WvBH9iOjPSH3SlY3Fb/j7dQSpVHAXD9RZxz6yiacyKckFK/od2+lAe6VAjHiR4Mk4I5dV/+TtbMTXu/Ji8zb2wd1MhGHOzmefzrm0tm4WWBUG2xvMUaSQuHLati4ELI3duD4FoFwhdDiDz5ILY+NxBCU/Pl8vZwr7hZ6em4FhBY0V1+nQjGclC3VQn+eXIXnU2XiPn//T0=
+  app: stark-atoll-89746
+  on:
+    repo: McKay1717/projet
