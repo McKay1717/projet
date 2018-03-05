@@ -8,3 +8,5 @@ deploy:
   app: stark-atoll-89746
   on:
     repo: McKay1717/projet
+before_script:
+  - psql -c 'create database db_test;' -U postgres
