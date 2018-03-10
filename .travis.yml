@@ -8,9 +8,7 @@ deploy:
   app: stark-atoll-89746
   on:
     repo: McKay1717/projet
+  run: "rake db:migrate"
+
 before_script:
   - psql -c 'create database db_test;' -U postgres
-script: 
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
