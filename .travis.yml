@@ -9,9 +9,15 @@ deploy:
   on:
     repo: McKay1717/projet
   run: rake db:migrate
+
 before_script:
-- psql -c 'create database db_test;' -U postgres
-addons:
-  code_climate:
-    repo_token:
-     secure: "GbbowtJRJFyhJihFY/K4n83gBlTvdySpHCwLi0tQ+Pup6/fMCo0mUzIRJa6DsCDPtZm1Pvh8mNrFqmGqK0462OAc9dIl5zvjnSs/QUO3uxO2jxzI/0BO8Q9vGqqcRoITdTuX4FNWTyl0sriQeJjvUnvC7egxv7S9P1aDtGjjiSWABZI+DkzZM9G0QwR75jbKSCQV5KpIVJMKLG8cs+UW4EjPxeJLrUS94uhXjiNbuYRkIj+O8sfZmK0tpCt9Zkvyo+p9KnMFsDQ133w5mZepGHWVoaoOe54saitGbpDlRav42qOCmJKg2WQ/mjpY8qoE8pKiVYz5t6kng3bJy4KpsDK6Sux90tkCWsqFbPVn2bi2B10WIBC/d+kjWYdA1sFHbz7DrXXLaYsAOmQms1hg8Cz/E1mG1W5yxqOufjWrOpPUwVuJ1CYCyGbhSBZ9MrpcPxoanOH6bl2Kn4P3KLLk2MIsImtYWkpRlJk6d/0Kb1oYYCmiLa3KtfnGJUjmWJuzzHMEtXa5CIftoDYFgTUqtmIZMyj/sda9bHQoCRmiJAB3UxJxJH2mu37V191FjTYLhIRchsSRxKHVijtYUXgTkDYNEtdnG471obruEmWX7mXMST8K22JQ5l0Q4dXDJwiiQHpEgpY+Et4NSahaZ7SeDpl2X8M3CMiFEBJ5sjz2Xw0="
+  - psql -c 'create database db_test;' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+env:
+  global:
+    secure: d/JIj4MhBkwPTW+JMNP6e6MAwr4q826BN9FtSC4DR2R/X8UBNsSKcEFE1AWRfS/aui17BA+9ycuFEeUBTnQWCrHYOEh2gYIkNz4SIl8Xpa1xoVqZiayzkHKbdw6l+uR38+YpcC2RyHt095W1RtSD8fE+uUjUFKAzQWGWXEuapzERRoqv5Zvhi5sOC4hqyIT/hl7r73EoQpf0V0WG3hD92dMJ9dwOu99trwz7A0NrPSf0NI+eDCGluu3oVI4XZu9t9EvJDnT5hCyOWGEpHP+6stWySkCwwmVH+mvpngv6iB2K7smqSXc8I/is29+6wZtMllsrWJADsQGKgnNNU5RqgsYxtMmHxkbgT7sgcHjqBbLEKRBWmCxvhC4PewuWOWBreEMZTYne0hKLc29L9+nrJtlVSAqYeWkOF0xO+bGgKbpHzQR8uqcXqDn6nAeJIn36RVT1b1kmzHS9LO4+D6UKAkd3pbQJWXqk69TIXQzb2j7XKvV3Npdy9cn8NNQme6kUL+5n9b6il+YIW+NUu9cplHW7DpXxLRytyY/EgD+P2FaVXsJTZtDpoS3f3gUo8/aWfHRo6OxBri4wOTiQ0X88d4NtppYurC5rEWaznR7ZUccDYFq/yISuvhtBQymQliKlpsoKudObMSgQaqGyILNHhrrVe6rOGrHswuRO+/qWOY0=
