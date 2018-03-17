@@ -14,9 +14,10 @@ before_script:
   - psql -c 'create database db_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - ./cc-test-reporter before-build -t simplecov
+
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
 
 env:
   global:
