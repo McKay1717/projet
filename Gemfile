@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'simplecov', require: false, group: :test
 gem 'nokogiri', '~> 1.8', '>= 1.8.2'
 gem 'rails-dom-testing', '~> 1.0', '>= 1.0.6'
 # Use ActiveModel has_secure_password
