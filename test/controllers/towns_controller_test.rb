@@ -17,16 +17,30 @@ class TownsControllerTest < ActionController::TestCase
   end
 
   test "should create town" do
-    assert_difference('Town.count') do
-      post :create, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
-    end
+    VCR.use_cassette("town_should create") do
+     assert_difference('Town.count') do
+       post :create, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
+     end
 
-    assert_redirected_to town_path(assigns(:town))
+     assert_redirected_to town_path(assigns(:town))
+   end
   end
+ 
+ test "should not create town" do
+    @town = towns(:empty)
+    VCR.use_cassette("town_not_should") do
+      assert_no_difference('Town.count') do
+        post :create, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
+      end
+      assert_response :success
+    end
+ end
 
   test "should show town" do
+   VCR.use_cassette("should_show_town") do
     get :show, id: @town
     assert_response :success
+   end
   end
 
   test "should get edit" do
@@ -35,9 +49,19 @@ class TownsControllerTest < ActionController::TestCase
   end
 
   test "should update town" do
-    patch :update, id: @town, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
-    assert_redirected_to town_path(assigns(:town))
+    VCR.use_cassette("town_should_update") do
+     patch :update, id: @town, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
+     assert_redirected_to town_path(assigns(:town))
+   end
   end
+
+  test "should not update town" do
+    VCR.use_cassette("town_bad_should_update") do
+      @town = towns(:empty)
+      patch :update, id: @town, town: { latitude: @town.latitude, longitude: @town.longitude, postcode: @town.postcode, town_name: @town.town_name }
+      assert_response :success
+    end
+   end
 
   test "should destroy town" do
     assert_difference('Town.count', -1) do

@@ -5,13 +5,15 @@ class TownTest < ActiveSupport::TestCase
  #   assert true
  # end
  test "town validation does geocoding" do
-   belfort = Town.new
-   belfort.town_name = 'belfort'
-   assert belfort.valid?
-   assert_equal(47.6379599, belfort.latitude)
-   assert_equal(6.8628942, belfort.longitude)
+   VCR.use_cassette("town_validation_geocoding") do
+    belfort = Town.new
+    belfort.town_name = 'belfort'
+    assert belfort.valid?
+    assert_equal(47.6379599, belfort.latitude)
+    assert_equal(6.8628942, belfort.longitude)
+  end
  end
- 
+
  test "town does not exist" do
    unknown = Town.new
    unknown.town_name = 'MyString'
