@@ -48,3 +48,6 @@ group :development do
   gem 'spring', '~> 2.0'
 end
 
+gem 'forecast_io'
+
+gem 'vcr', '~> 3.0.3', group: [:test]

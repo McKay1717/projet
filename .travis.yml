@@ -9,17 +9,16 @@ deploy:
   on:
     repo: McKay1717/projet
   run: rake db:migrate
-
 before_script:
-  - psql -c 'create database db_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
+- psql -c 'create database db_test;' -U postgres
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
 after_script:
-  - ./cc-test-reporter format-coverage -t simplecov # Format backend coverage
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
-
+- "./cc-test-reporter format-coverage -t simplecov"
+- if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
 env:
   global:
-    secure: d/JIj4MhBkwPTW+JMNP6e6MAwr4q826BN9FtSC4DR2R/X8UBNsSKcEFE1AWRfS/aui17BA+9ycuFEeUBTnQWCrHYOEh2gYIkNz4SIl8Xpa1xoVqZiayzkHKbdw6l+uR38+YpcC2RyHt095W1RtSD8fE+uUjUFKAzQWGWXEuapzERRoqv5Zvhi5sOC4hqyIT/hl7r73EoQpf0V0WG3hD92dMJ9dwOu99trwz7A0NrPSf0NI+eDCGluu3oVI4XZu9t9EvJDnT5hCyOWGEpHP+6stWySkCwwmVH+mvpngv6iB2K7smqSXc8I/is29+6wZtMllsrWJADsQGKgnNNU5RqgsYxtMmHxkbgT7sgcHjqBbLEKRBWmCxvhC4PewuWOWBreEMZTYne0hKLc29L9+nrJtlVSAqYeWkOF0xO+bGgKbpHzQR8uqcXqDn6nAeJIn36RVT1b1kmzHS9LO4+D6UKAkd3pbQJWXqk69TIXQzb2j7XKvV3Npdy9cn8NNQme6kUL+5n9b6il+YIW+NUu9cplHW7DpXxLRytyY/EgD+P2FaVXsJTZtDpoS3f3gUo8/aWfHRo6OxBri4wOTiQ0X88d4NtppYurC5rEWaznR7ZUccDYFq/yISuvhtBQymQliKlpsoKudObMSgQaqGyILNHhrrVe6rOGrHswuRO+/qWOY0=
+  - secure: d/JIj4MhBkwPTW+JMNP6e6MAwr4q826BN9FtSC4DR2R/X8UBNsSKcEFE1AWRfS/aui17BA+9ycuFEeUBTnQWCrHYOEh2gYIkNz4SIl8Xpa1xoVqZiayzkHKbdw6l+uR38+YpcC2RyHt095W1RtSD8fE+uUjUFKAzQWGWXEuapzERRoqv5Zvhi5sOC4hqyIT/hl7r73EoQpf0V0WG3hD92dMJ9dwOu99trwz7A0NrPSf0NI+eDCGluu3oVI4XZu9t9EvJDnT5hCyOWGEpHP+6stWySkCwwmVH+mvpngv6iB2K7smqSXc8I/is29+6wZtMllsrWJADsQGKgnNNU5RqgsYxtMmHxkbgT7sgcHjqBbLEKRBWmCxvhC4PewuWOWBreEMZTYne0hKLc29L9+nrJtlVSAqYeWkOF0xO+bGgKbpHzQR8uqcXqDn6nAeJIn36RVT1b1kmzHS9LO4+D6UKAkd3pbQJWXqk69TIXQzb2j7XKvV3Npdy9cn8NNQme6kUL+5n9b6il+YIW+NUu9cplHW7DpXxLRytyY/EgD+P2FaVXsJTZtDpoS3f3gUo8/aWfHRo6OxBri4wOTiQ0X88d4NtppYurC5rEWaznR7ZUccDYFq/yISuvhtBQymQliKlpsoKudObMSgQaqGyILNHhrrVe6rOGrHswuRO+/qWOY0=
+  - secure: nPwC8UlIV6vShYT0fhCqRXSEdJq5dxJO4laUmyuU4qkRDL+uYq9vbSUDZELMrLBeQrS0DzkPknXvGnVW0RaJA2GDehG+Oz7Mhio4czT32VR0NDLvU5sgBWukVG98BfK6X2uMMOgtsUtIJhG80PS0n5L6gbyDo0VQd5OOsR4qhP1ac8yUzacfXNurK3HKuZKcMSoWc4D4ONlwJ4T35QjRshD9sJR86rM5ytGV+8kaI+Jf93TWU6D0DGkep2w9U+6dm0lPv3L1MSllj71noXWZtmjtTqYhOZrSDXTbHBKuXcQ4PaYFJ40mbhW+CUGl8uJJV8k/QTNm7NW1VRyU6lhFm+2gZlXFKg8g1CCdIY9Sj0k0lDexEL520O1brHPFqD2326Wy4NSADGjU8tUt0wAglFztLSZPldFYZ4PYssuondgL68Q96afYxEoh/Dnr6ujhHle9oYsS2mcS+Y7GQIzpJtqekIDWwFCz1+hYgP7uarOnUCHKePTLj9+nLWUMFIFvfDv2D78BQjvNwy6UFJXhcmsotLMKfdDJM3RD8t2JbeJCv+EkTZxXainM5THUXg90fI9XPZz9tZEQl99PDbGsADjqnz3gjP0Ux3/vUxKRWgTLE/eW8nIXLCV/xMGVpRceGcS7tRqtFTvGJkm18Glq9UsEsvPrVlKknPeNLBhYjMQ=
