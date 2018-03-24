@@ -10,4 +10,14 @@ class Town < ActiveRecord::Base
       self.longitude = places.lon
     end
   end
+  public
+  def get_forecast
+    if self.latitude && self.longitude
+      forecast = ForecastIO.forecast(self.latitude,self.longitude, params: { units:'si', lang: 'fr' })
+      if forecast
+        return forecast.currently
+      end
+    end
+    return nil
+  end
 end

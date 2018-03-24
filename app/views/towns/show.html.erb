@@ -14,9 +14,19 @@
   <strong>Longitude:</strong>
   <%= @town.longitude %>
 </p>
-<p>
-  <strong>Il fais quel temps ?</strong>
-  <%= resource.currently.summary %>
+  <p>
+    <strong>Météo:</strong>
+    <%= @weather.summary %>
+  </p>
+
+  <p>
+    <strong>Température:</strong>
+    <%= @weather.temperature %>
+  </p>
+
+  <p>
+    <strong>Humidité:</strong>
+    <%= @weather.humidity %>
 </p>
 <p>
   <strong>Latitude:</strong>
